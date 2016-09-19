@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="webcontent" type="webcontentType"/>
+ 
+  <xs:complexType name="labelType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="locale" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="predifinedvalueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="locale" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="tipType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="locale" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="ddmformfieldType">
+    <xs:sequence>
+      <xs:element type="labelType" name="label"/>
+      <xs:element type="predifinedvalueType" name="predifinedvalue"/>
+      <xs:element type="tipType" name="tip"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="dataType" use="optional"/>
+    <xs:attribute type="xs:string" name="fieldNamespace" use="optional"/>
+    <xs:attribute type="xs:string" name="indexType" use="optional"/>
+    <xs:attribute type="xs:string" name="name" use="optional"/>
+    <xs:attribute type="xs:string" name="required" use="optional"/>
+    <xs:attribute type="xs:string" name="showLabel" use="optional"/>
+    <xs:attribute type="xs:string" name="type" use="optional"/>
+    <xs:attribute type="xs:string" name="repeatable" use="optional"/>
+    <xs:attribute type="xs:string" name="readonly" use="optional"/>
+  </xs:complexType>
+  
+  <xs:complexType name="ddmformType">
+    <xs:sequence>
+      <xs:element type="ddmformfieldType" name="ddmformfield" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="available-locales"/>
+    <xs:attribute type="xs:string" name="default-locale"/>
+  </xs:complexType>
+  
+  <xs:complexType name="ddmstructureType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="description"/>
+      <xs:element type="xs:string" name="definition" minOccurs="0"/>
+      <xs:element type="xs:string" name="structurekey"/>
+      <xs:element type="ddmformType" name="ddmform" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="journalarticleType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="title"/>
+      <xs:element type="xs:string" name="description"/>
+      <xs:element type="xs:string" name="content"/>
+      <xs:element type="ddmstructureType" name="ddmstructure" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="webcontentType">
+    <xs:sequence>
+      <xs:element type="journalarticleType" name="journalarticle" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>
